@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class Student {
+public class Studentdto {
     private Long id;
     private String name;
     public String email;
