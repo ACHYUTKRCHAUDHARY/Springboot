@@ -1,25 +1,29 @@
 package org.example.spring2.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.spring2.dto.StudentDto;
 import org.example.spring2.entity.Student;
 import org.example.spring2.repository.StudentRepository;
+import org.example.spring2.service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
     /**
      * over here bean of the student repository is injected
      * @param studentRepository
+     *  public StudentController(StudentRepository studentRepository) {
+     *         this.studentRepository = studentRepository;
+     *     }
      */
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+
 
     @GetMapping("/student")
     /**
