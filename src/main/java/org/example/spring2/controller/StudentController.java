@@ -1,13 +1,12 @@
 package org.example.spring2.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.spring2.dto.AddStudentRequestDto;
 import org.example.spring2.dto.StudentDto;
-import org.example.spring2.entity.Student;
-import org.example.spring2.repository.StudentRepository;
 import org.example.spring2.service.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentService  studentService;
 
     /**
      * over here bean of the student repository is injected
@@ -27,13 +26,13 @@ public class StudentController {
      */
 
 
-    @GetMapping("/student")
+    @GetMapping("/students")
     /**
      * in the controller always dto goes inside
      * this is for the trial purpose only
      */
-    public List<Student> getStudent() {
-        return studentService.getAllStudent();
+    public ResponseEntity<List<StudentDto>> getStudent() {
+        return ResponseEntity.ok(studentService.getAllStudent());
     }
 
 //    @GetMapping("/student/{id}/{name}")
@@ -42,7 +41,15 @@ public class StudentController {
 //        return "path vaiable "+id+"name "+name;
 //    }
 
-    @GetMapping("/student/{id}")
-    public
+    @GetMapping("/students/{id}")
+    public ResponseEntity<StudentDto> getStudentById(@PathVariable Long id){
+        return ResponseEntity.ok(studentService.getStudentById(id));
+    }
 
+    @PostMapping
+    public ResponseEntity<StudentDto> addStudent(@RequestBody AddStudentRequestDto addStudentRequestDto){
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(studentService.createNewStudent(addStudentRequestDto));
+    }
 }
