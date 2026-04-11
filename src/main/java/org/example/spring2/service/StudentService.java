@@ -1,4 +1,10 @@
 package org.example.spring2.service;
 
-public class StudentService {
+import org.example.spring2.dto.StudentDto;
+
+import java.util.List;
+
+public interface StudentService {
+    List<StudentDto> getAllStudent();
+
 }
