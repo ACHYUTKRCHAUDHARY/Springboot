@@ -6,6 +6,7 @@ import org.example.spring2.entity.Student;
 import org.example.spring2.repository.StudentRepository;
 import org.example.spring2.service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class StudentController {
      *  public StudentController(StudentRepository studentRepository) {
      *         this.studentRepository = studentRepository;
      *     }
+     *     in the controller section we are try to put only dto and service
      */
 
 
@@ -31,12 +33,16 @@ public class StudentController {
      * this is for the trial purpose only
      */
     public List<Student> getStudent() {
-        return studentRepository.findAll();
+        return studentService.getAllStudent();
     }
 
+//    @GetMapping("/student/{id}/{name}")
+//    public String getStudentById(@PathVariable("id") Long id,
+//                                     @PathVariable String name) {
+//        return "path vaiable "+id+"name "+name;
+//    }
+
     @GetMapping("/student/{id}")
-    public StudentDto getStudentById(){
-        return new StudentDto(4L,"Achyut","achyutchaudhary@gmail.com");
-    }
+    public
 
 }
