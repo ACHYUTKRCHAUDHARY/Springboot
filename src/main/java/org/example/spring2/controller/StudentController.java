@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/students")
 public class StudentController {
 
     private final StudentService  studentService;
@@ -26,7 +27,7 @@ public class StudentController {
      */
 
 
-    @GetMapping("/students")
+    @GetMapping
     /**
      * in the controller always dto goes inside
      * this is for the trial purpose only
@@ -41,7 +42,7 @@ public class StudentController {
 //        return "path vaiable "+id+"name "+name;
 //    }
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<StudentDto> getStudentById(@PathVariable Long id){
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
