@@ -1,5 +1,6 @@
 package org.example.spring2.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.spring2.dto.AddStudentRequestDto;
 import org.example.spring2.dto.StudentDto;
@@ -49,7 +50,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> addStudent(@RequestBody AddStudentRequestDto addStudentRequestDto){
+    public ResponseEntity<StudentDto> addStudent(@RequestBody @Valid AddStudentRequestDto addStudentRequestDto){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(studentService.createNewStudent(addStudentRequestDto));
