@@ -21,6 +21,9 @@ import java.util.List;
  * iswhy modelmapper library is used
  * in the model mapper paramter we make sure that the two class have the same
  * fields
+ * get means body return karne waqt -200
+ * post ->201
+ * delete means no body return 204
  */
 @Service
 @RequiredArgsConstructor
@@ -62,6 +65,19 @@ public class StudentServiceImpl implements StudentService {
         else {
             studentRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public StudentDto updateStudent(Long id,
+                                    AddStudentRequestDto addStudentRequestDto) {
+        Student student=studentRepository
+                .findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("student not found with ID: "+id));
+
+        modelMapper.map(addStudentRequestDto,student);
+
+        student =studentRepository.save(student);
+        return modelMapper.map(student,StudentDto.class);
     }
 
 
